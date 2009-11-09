@@ -1,0 +1,215 @@
+/* * Quick mash-up of CSS for the TG quick start page. */
+
+html, body {
+    color: black;
+    background-color: #ddd;
+    font: small "Lucida Grande", "Lucida Sans Unicode", geneva, verdana, sans-serif;
+}
+
+#minimal {
+    border: 1px solid #008;
+    padding:5px;
+}
+
+#body .heading1 {
+    border:2px solid black;
+    background: #22d;
+    color: #efefef;
+}
+
+#body .heading1 .left {
+    font-size: large;
+}
+
+#body .heading1 .right {
+    font-size: small;
+    font-style: italic;
+    color: #bbb;
+    text-align:right;
+}
+
+#header .right {
+    text-align:right;
+}
+
+#left_pane {
+    background: #efefef;
+    text-align: justify;
+}
+
+#right_pane {
+    border: 2px solid black;
+    border-top: none;
+    background: #22d;
+    color: #efefef;
+}
+
+.category a {
+    color: #efefef;
+    text-decoration: none;
+}
+
+#left_pane .action_link {
+    text-align: center;
+}
+
+.edit_dialog {
+    background: #44e;
+    border:4px solid #22b;
+    top: 100px;
+    left: 100px;
+    text-align: center;
+}
+
+.edit_dialog h2 {
+    color: #efefef;
+}
+
+#left_pane .note, #left_pane .note_header {
+    background: #ddd;
+    border: 1px solid gray;
+}
+
+img {
+    border: none 
+}
+
+#left_pane .note_header {
+    background: #666;
+    color: #ddd;
+}
+
+#left_pane .note_header a {
+    text-align: right;
+    color: #efefef;
+}
+
+.tab_front {
+    background: #efefef;
+}
+
+.tab_rear {
+    background: none;
+}
+
+.tab {
+    border-left:1px solid #333;
+    border-top:1px solid #333;
+    border-right:1px solid #333;
+    text-decoration:none;
+}
+
+.tab a {
+    text-decoration:none;
+}
+
+.tab_body {
+    border: 1px solid #555;
+}
+
+#right_pane h3 {
+    font-style: italic;
+}
+
+#right_pane .attachment a {
+    font-weight: bold;
+    color: #ff0;
+}
+
+#contents {
+    background: #efefef 
+}
+
+#contents a {
+    text-decoration: none 
+}
+
+tr th {
+    text-align:left;
+    background-color:#f0f0f0;
+    color:#333;
+}
+
+tr.odd td {
+    background-color:#edf3fe;
+}
+
+tr.even td {
+    background-color:#fff;
+}
+
+#header table td .right_cell {
+    text-align:right;
+}
+
+#header a {
+    text-decoration:none 
+}
+
+a.link, a, a.active {
+    color: #369;
+}
+
+#main_content {
+    color: black;
+    font-size: 127%;
+    background-color: white;
+    border-left: 1px solid #aaa;
+    border-right: 1px solid #aaa;
+}
+
+#sidebar {
+    border: 1px solid #aaa;
+    background-color: #eee;
+    font-size: 88%;
+}
+
+h2 {
+    font-size: 150%;
+}
+
+.code {
+    font-family: monospace;
+}
+
+span.code {
+    font-weight: bold;
+    background: #eee;
+}
+
+.notice {
+    background: #eef URL('../images/info.png') left center no-repeat;
+    border: 1px solid #cce;
+}
+
+.fielderror {
+    color: red;
+    font-weight: bold;
+}
+
+#dropdown {
+    padding-left:3px;
+    border-left: 1px solid grey;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    background: white;
+}
+
+#dropdown a {
+    text-decoration:none;
+    color: black;
+}
+
+.combo {
+    background-image:URL('../images/dropdown.png');
+    background-repeat:no-repeat;
+    background-position: center right;
+    width:100px;
+    padding-right: 17px;
+}
+
+.details {
+    width:250px;
+}
+
+

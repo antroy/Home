@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>$title</title>
+<link rel="stylesheet" href="./static/css/structure.css"/>
+<link rel="stylesheet" href="./static/css/style.css"/>
+</head>
+<body>
+    
+    $header
+
+    <div id="body">
+        <div class="heading1">
+            <div class="left">
+                #if $tagname
+                    Search results - Tag: '$category'
+                #else
+                    Contacts
+                #end if
+            </div>
+        </div>
+
+        <div id="left_pane">
+            <div id="contents">
+                #for $contact in $contacts
+                    <span class="contact"><a href="contact?id=${contact.id}">${contact.name}</a></span><br/>
+                #end for
+                </div>
+        </div>
+
+        <div id="right_pane">
+            <div id="tags">
+                <h3>Tags:</h3> 
+                #for $tag in $tags
+                    <div class="tag">
+                        <a href="tag_search?tag=$tag" alt="Get $tag contacts">$tag</a>
+                    </div>
+                #end for
+            </div>
+            <div id="quick_add">
+                <form name="quickadd" method="POST" action="quickadd">
+                    Add a new entry quickly:
+                    <textarea name="details"></textarea>
+                    <input type="submit"/>
+                    e.g.
+                    <pre>
+ Anthony Roy
+ 86 High St
+ Scapegoat Hill
+ HD7 4NJ
+
+ t: 01484 655010
+ f: 01484 655010
+ e: home@antroy.co.uk
+ w: www.antroy.co.uk
+ (Facebook): Anthony Roy
+                    </pre>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

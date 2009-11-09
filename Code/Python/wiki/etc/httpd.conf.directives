@@ -1,0 +1,13 @@
+
+<LocationMatch "/wiki/*">
+  SetHandler mod_python
+  PythonHandler handler
+
+  PythonOption wikiDir "C:/Documents and Settings/aroy/My Documents/svn/ant-trunk/Python/wiki/data/wiki"
+  PythonOption staticDir "C:/Documents and Settings/aroy/My Documents/svn/ant-trunk/Python/wiki/data/static"
+  PythonOption templateDir "C:/Documents and Settings/aroy/My Documents/svn/ant-trunk/Python/wiki/templates"
+  PythonOption contextPath "/wiki/"
+
+  PythonPath "sys.path+['C:/Documents and Settings/aroy/My Documents/svn/ant-trunk/Python/wiki/py']"
+  PythonDebug On
+</LocationMatch>

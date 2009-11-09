@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE ACTIONS SYSTEM "actions.dtd">
+
+<ACTIONS>
+    <ACTION NAME="superscript.show">
+        <CODE>
+			view.getDockableWindowManager().toggleDockableWindow("superscript");
+        </CODE>
+    </ACTION>
+</ACTIONS>

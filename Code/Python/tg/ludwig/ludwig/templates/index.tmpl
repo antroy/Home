@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>The Ludwig Brainstormer</title>
+<link rel="stylesheet" href="./static/css/style.css"/>
+</head>
+<body>
+    
+    $header
+
+    <div id="body">
+        <div class="heading1">
+            <div class="left">
+                #if $category 
+                    Search results - Category: '$category'
+                #else if $status
+                    Search results - Status: '$status'
+                #else
+                    Index of Ideas
+                #end if
+            </div>
+        </div>
+
+        <div id="left_pane">
+            <div id="contents">
+                #for $idea in $ideas
+                    <span class="idea"><a href="idea?id=${idea.id}">${idea.title}</a></span><br/>
+                #end for
+                </div>
+        </div>
+
+        <div id="right_pane">
+            <div id="status">
+                <h3>Statuses</h3>
+                <div class="status_line">
+                    #for $stat in $statuses
+                    <div class="category">
+                        <a href="status_search?status=$stat" alt="Get $stat ideas">$stat</a>
+                    </div>
+                    #end for
+                </div>
+            </div>
+
+            <div id="categories">
+                <h3>Categories:</h3> 
+                #for $cat in $categories
+                    <div class="category">
+                        <a href="category_search?category=$cat" alt="Get $cat ideas">$cat</a>
+                    </div>
+                #end for
+            </div>
+        </div>
+    </div>
+</body>
+</html>

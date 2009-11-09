@@ -1,0 +1,13 @@
+<h1>TESTING!!!</h1>
+
+
+{% if contact_list %}
+    <ul>
+    {% for contact in contact_list %}
+    <li><a href="{{ contact.id }}/">{{ contact.first_name }} {{ contact.last_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No contacts are available.</p>
+{% endif %}
+    

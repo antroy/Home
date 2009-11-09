@@ -1,0 +1,2 @@
+db_module=py_planner.model
+history_dir=$base/py_planner/sqlobject-history

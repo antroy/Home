@@ -1,0 +1,118 @@
+==========
+Lesson One
+==========
+
+TOOLS: Setting up the Development Environment
+=============================================
+
+Downloading and Installing the Basic Tools
+------------------------------------------
+
+The first step is to set up your machine to be able to write and run Java programs. You will need to install the following programs:
+
+1. Java itself. Download and install the latest JDK (Java Development Kit) from Sun: JDK_. 
+2. A Console. Of course Windows has a console built in, but it's crap. Download Console2 from sourceforge: Console2_.
+3. A Text Editor. Again, there's Notepad. lol! Crap. There are hundreds of text editors out there. Literally. All of which have a variety of features, and steepness of learning curve. I'd recommend one of the following:
+    1. ConText. This has an interface similar to most other Windows applications, has tabbed windows for managing multiple open files, Syntax Highlighting (invaluable when programing - colors the text to promote readability) and advanced search/replace. ConText_.
+    2. GVim. This has a steep learning curve. It is superficially like a Windows App, and has tabs and a few menus, but otherwise is very different. It is modal, so that at any one time you are **either** inserting text **or** moving around and manipulating text. It is far more powerful in what it can do, faster in typing and manipulating text, and infinitely configurable than (almost) any other editor. It also has the steepest learning curve. GVim_.
+
+It is worth checking with your company whether much work/configuration is done on Unix/Linux servers, since all will have vi/vim (the console version of GVim) installed as the default editor. In that case, learning GVim as you are learning programming will pay dividends. Its worth it anyway, since you will be learning Java fairly slowly to start with, so the speed of each will increase together. Let me know if you choose GVim and I'll add GVim specific stuff to the tutorials.
+
+.. _JDK: http://tinyurl.com/5byhkq
+.. _Console2: http://sourceforge.net/projects/console
+.. _ConText: http://www.contexteditor.org/
+.. _GVim: http://www.vim.org/
+
+Configuring the Environment
+---------------------------
+
+Once you have the tools installed, restart the machine. Once you've rebooted:
+
+1. Open up Explorer and create a new folder c:\dev\tutorial1.
+2. Create a new text file in that folder called One.java
+3. Open that file in your text editor.
+4. Open Console2
+5. Navigate to the tutorial folder::
+
+    cd c:\dev\tutorial1
+
+6. Check to see if Java is working::
+
+    java --version
+
+If step 6 throws an error, then you will need to set up your environment variables. If this is the case, email me and I'll walk you through it.
+
+THEORY: Things and Actions
+==========================
+
+Java is an Object Oriented programming language (though to start with we'll be brushing that fact under the carpet to an extent). This means that it tries to model the world in terms of Objects, Attributes of those objects (called 'fields') and Actions on those objects (called 'methods'). So we may have an object called "Gem", and an object called "Badger". The "Gem" may have a field called "furLength" which is set to "short", and "Badger" may have a "furLength" field set to "long".
+
+Programming is all about abstraction. Taking ideas and finding the parts they have in common and exploiting that commonality. In the case of object oriented programming, we abstract the common features of different objects into what is called a Class. In our example the class is Dog, and has a field called furLength. All objects belong to a class, and have each of that classes fields, but each may set the value of that field to a different value - hence we have Gem and Badger, both having the field furLength, but each having a different value for that field.
+
+The other thing that classes define is the behaviour all objects of the class will have. For example, all Dogs will bark. In the terms I mentioned earlier, the class Dog has a *method* 'bark'. It may also have a method 'eat'. Now you'd want to be able to say *what* the dog will eat, and so methods can have a list of parameters. The parameters are given as a list in braces::
+    
+    Gem.bark();
+    Gem.eat("salami");
+
+The first method call on th Gem object has no parameters, the second has a single parameter "salami". The '.' between 'Gem' and 'bark' can be thought of as "belonging to", so ``Gem.bark()`` equates to "call the method bark on the object Gem with no parameters".
+
+This will all start to become clear as you go along, so enough of the boring stuff for now, and on with an example:
+
+EXCERCISE: Hello World
+======================
+
+Your first program starts here! The aim is to get the program to print out "Hello World" in the console. Easy eh? We will write the program, compile it and run it, and then I will explain what it all means!
+
+1. In the text editor, in the file One.java type the following::
+    
+    public class One {
+        public static void main(String[] args){
+            System.out.println("Hello World");
+        }
+    }
+
+2. In the console, type::
+    
+    javac One.java
+
+3. Look in the Explorer window (or type ``dir`` in the console), and you will see a new file called ``One.class``. This is the compiled code.
+4. In the console, type::
+
+    java One
+
+Watch "Hello World" appear. Exciting eh?
+
+THEORY: What's going on in the program.
+=======================================
+
+The full details aren't important here, but here's the jist. Everything in Java must happen in a class, including running the program. So here we define a class called One. The most basic class of all would be defined like so::
+    
+    class Dog {}
+
+The word class indicates that we are defining a class. The word "Dog" is the name of that class. The parentheses '{}' groups a bunch of statements together, in this case no statements (but we still need the parentheses). 
+
+All classes, methods and fields have levels of privacy. The details of this are a topic for later on, but I will mention a couple of important points here. Firstly there are four privacy levels, from least to most private: public, protected, default and private. Each .java file must have a single public class with the same name as the text file. So in the example that you ran, we had a public class called "One" defined in a file called One.java. Enough about privacy.
+
+The next point is that you can think of classes as being objects, and as such they can also have methods and fields. But it would start to get silly if we had to define a superclass to specify the fields and methods belonging to a class. So we do this inside the class definition by using the modifier *static*. Again, a topic for later - but essentially it just means that we don't need an actual object to use static methods or fields. For example Dog may have a static field (often called a 'class' field) ``humanYearEquivalent`` set to "7". This would be the equivalent of saying that *dogkind* has a field humanYearEquivalent - you don't need any specific dog to find out that information.
+
+So finally, we can put together the whole program. We have (the only and required) public class called "One", it has a single class method called 'main' which takes a single parameter called args, whose type must be String[]. A String is a class, and objects of type String can be created with the shortcut syntax "a string" - i.e. surround the text in quotes. The [] indicates that the parameter is an array of Strings - i.e. an indexed list of Strings.
+
+System is a class, and has a static field called 'out' (which is an object reference to "Standard Output" i.e. the console), which in turn has a method (an object - or instance - method) called 'println' which takes a String as a parameter - which as you may now suspect prints that parameter String to the console.
+
+The method main() is special in a sense - it is called automatically by the java command with any command line parameters passed in in the 'args' parameter. So, calling the program with::
+
+    java One bob fred bernard
+
+will set the args parameter to the array {"bob", "fred", "bernard"}. These can then be accessed in the code with the syntax ``args[0], args[1] and args[2]``. Note that indexes in Java are 0 based - i.e. counting always starts with 0.
+
+EXCERCISE: Printing the parameters.
+===================================
+
+1. Modify the program One.java to print out the parameters one after the other assuming that you are going to call the program with the following command::
+
+    java One bob fred bernard
+
+2. What happens if you try to access the (non-existent) fourth parameter. i.e. call ``args[3]``?
+
+Until next time...
+

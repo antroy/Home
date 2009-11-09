@@ -1,0 +1,6 @@
+import javax.swing.*;
+import java.lang.*;
+
+frame = new JFrame("Hi");
+java.lang.System.out.println("Frame created from Beanshell");
+frame.show();

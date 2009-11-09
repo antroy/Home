@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE DOCKABLES SYSTEM "dockables.dtd">
+
+<!-- FastOpen dockable windows -->
+
+<DOCKABLES>
+	<DOCKABLE NAME="superscript">
+		//(new com.patelsoft.superscript.SuperScriptPlugin().openDockable(view));
+		((com.patelsoft.superscript.SuperScriptPlugin)jEdit.getPlugin("com.patelsoft.superscript.SuperScriptPlugin")).openDockable(view);
+	</DOCKABLE>
+</DOCKABLES>

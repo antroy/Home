@@ -1,0 +1,39 @@
+from monitor import MonitorDetails
+
+smtp_server = 'email101'
+base_url = 'http://antroy.homelinux.net/gallery'
+
+#=========  Ant's Config ==========
+ants_folder = 'c:/Downloads'
+ants_previous_state = 'c:/Documents and Settings/aroy/.monitor'
+ants_email_list = ['aroy@hpi.co.uk', 'work@antroy.co.uk']
+ants_template = """Hi all,
+Some more photographs have been added to the following galleries:
+%s
+
+Cheers,
+
+-- 
+Ant..."""
+
+ant_mon = MonitorDetails(ants_folder, ants_previous_state, base_url, ants_email_list, ants_template)
+#----------------------------------
+
+#=========  Ash's Config ==========
+ashs_folder = 'c:/0'
+ashs_previous_state = 'c:/Documents and Settings/aroy/.ashmonitor'
+ashs_email_list = ['aroy@hpi.co.uk', 'work@antroy.co.uk']
+ashs_template = """Hi all,
+Some more photographs have been added to the following galleries:
+%s
+
+Cheers,
+
+-- 
+Ash..."""
+
+ash_mon = MonitorDetails(ashs_folder, ashs_previous_state, base_url, ashs_email_list, ashs_template)
+#----------------------------------
+
+
+monitors = [ant_mon, ash_mon]

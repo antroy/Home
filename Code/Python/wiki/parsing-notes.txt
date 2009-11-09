@@ -1,0 +1,10 @@
+1) Build up an element tree (xml.etree) of the wiki markup.
+2) Build up a dictionary of dictionaries of markup. e.g. if markup could include [[u:underlined text]] or [[bo: bold here]] or [[boo: scary text]] then there should be the following:
+
+common =  "[["
+markup_dict = dict(u={":": underline}, b=dict(o={":": bold, "o":{":": scary}}))
+
+Or similar.
+
+
+

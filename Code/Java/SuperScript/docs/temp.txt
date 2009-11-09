@@ -1,0 +1,12 @@
+<h3>Tips and Tricks</h3>
+	<p>SuperScript provides a complete multi-scripting language shell as well as ability to jump between Scripting languages to do task they are good for. Besides just providing a common shell for any scripting language, SuperScript adds certain common shortcuts to various tasks. Some of them are as below
+	<ul>
+		<li><b>To bind a variable to the context:</b><br><font color="#0000FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>superscript.declareVariable(view, &lt;varname&gt;, &lt;varvalue&gt;)</code></font>
+		<br>This is as simple as it gets. After this you can use this variable anywhere includng across scripting languages.<br> <i>Note</i> that this is different from declaring variables in a scripting language. Variables declared in a scripting language (whether in eval or executing scripts) are local to the run. Whereas this kind of declaration is called "Binding" variables so that they are global.</li>
+	</ul>
+	</p>
+
+<h3>Release Notes & Change Log for Version :0.5 (?????)</h3>
+<ol>
+	<li>Added ability to declare variables via superscript plugin.</li>
+</ol>

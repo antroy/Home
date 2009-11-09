@@ -1,0 +1,22 @@
+### Properties used by jEdit
+
+plugin.antroy.maven.MavenPlugin.name=Maven
+plugin.antroy.maven.MavenPlugin.author=Anthony Roy
+plugin.antroy.maven.MavenPlugin.version=0.1
+plugin.antroy.maven.MavenPlugin.docs=index.html
+plugin.antroy.maven.MavenPlugin.activate=defer
+plugin.antroy.maven.MavenPlugin.depend.0=jedit 04.02.99.00
+plugin.antroy.maven.MavenPlugin.depend.1=jdk 1.5
+
+maven-dock.title = Maven
+maven-dock.label = Maven Projects
+
+show-maven-dockable.label=Maven Project Viewer
+
+plugin.antroy.maven.MavenPlugin.menu = \
+  show-maven-dockable
+ 
+plugin.antroy.maven.MavenPlugin.option-group=maven.general
+options.maven.general.code = new antroy.maven.MavenOptionPane();
+options.maven.general.label = Maven Options
+

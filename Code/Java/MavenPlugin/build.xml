@@ -1,0 +1,58 @@
+<project name="Maven Plugin" default="dist" basedir=".">
+
+  <property file="${user.home}/build.properties"/>
+  <property name="jedit.install.dir"  value=""/>
+  <property name="jar.name"  value="Maven.jar"/>
+  <property name="local.jars.dir" value="${user.home}/.jedit/jars"/>
+  <property name="global.jars.dir" value="${jedit.install.dir}/jars"/>
+
+  <property name="build.dir"  value="build"/>
+  <property name="install.dir"  value="${local.jars.dir}"/>
+
+
+  <path id="project.class.path">
+    <pathelement location="${jedit.install.dir}/jedit.jar"/>
+    <pathelement location="."/>
+    <fileset dir="${local.jars.dir}" includes="Console.jar, ProjectViewer.jar" />
+    <fileset dir="${global.jars.dir}" includes="Console.jar, ProjectViewer.jar" />
+  </path>
+
+  <target name="init">
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${install.dir}"/>
+  </target>
+  
+  
+  <target name="clean">
+    <delete dir="${build.dir}"/>
+  </target>
+  
+  <target name="compile" depends="init">
+    <javac
+      srcdir="."
+      destdir="${build.dir}"
+      deprecation="on"
+      includeJavaRuntime="yes"
+    >
+      <classpath refid="project.class.path"/>
+      <compilerarg value="-Xlint:unchecked"/>
+    </javac>
+  </target>
+
+
+  <target name="dist" depends="compile">
+    <echo>${install.dir}/${jar.name}</echo>
+        
+    
+    <jar jarfile="${install.dir}/${jar.name}">
+      <fileset dir="${build.dir}" includes="**/*.class"/>
+      <fileset dir=".">
+        <include name="images/*"/>
+        <include name="**/*.props"/>
+        <include name="**/*.html"/>
+        <include name="actions.xml"/>
+        <include name="dockables.xml"/>
+      </fileset>
+    </jar>
+  </target>
+</project>

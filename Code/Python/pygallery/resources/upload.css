@@ -1,0 +1,143 @@
+body {
+    background:#eee;
+    font-size:12pt
+}
+
+a {
+    color: #bb3;
+    text-decoration:none;
+    font-weight:bold
+}
+
+a:hover {
+    color: #ff9900
+}
+
+h1 {
+    color: #444
+}
+
+h2 {
+    color:#eee
+    background:#444;
+    width:60%
+}
+
+.treeList {
+    color:#444;
+    font-weight:bold
+}
+
+.errors {
+    color: #f00;
+    font-weight:bold
+}
+
+.errors p {
+    margin-bottom:0px
+}
+
+#photo_add_delete_tab {
+display:none
+}
+
+.error {
+    color: #f00;
+    font-style:italic;
+    font-size:smaller;
+    margin-left:20px
+}
+p.error {
+    margin-top:2px
+}
+
+#top_panel table {
+    width: 100%
+}
+
+textarea {
+    width:100%;
+    height:200px
+}
+
+input.text {
+    width:100%
+}
+
+#header {
+    width: 8em;
+position:absolute;
+top:5px;
+left:5px;
+border:1px solid green;
+    margin-left:10px;
+    margin-right:10px;
+    padding-left:5px
+}
+
+#tab_panel {
+position:absolute;
+left:10em;
+right:5px;
+top:5px;
+border:1px solid black
+}
+
+#tab_button_panel a {
+border:1px solid black;
+border-left:none;
+margin:0px;
+padding:0px
+}
+
+#top_panel {
+    padding-left:10px;
+    padding-right:10px;
+    margin-right:3px
+}
+
+#bottom_panel {
+    padding-left:10px;
+    padding-right:10px;
+    margin-left:3px;
+    font-size:10pt
+}
+
+#top_panel, #bottom_panel {
+    float:left;
+    border: 1px solid #000;
+    margin:10px
+}
+
+h3 {
+    text-align:center;
+    color:#e80
+}
+
+#treepanel {
+    border: 1px solid #000;
+    margin: 5px 30px
+}
+
+#top {
+    margin: 5px 30px
+}
+
+.treeList a {
+    font-size:10pt
+}
+
+.edit_folder_link {
+    font-size:12pt;
+    color: #550
+}
+
+a.edit_folder_link:hover {
+    color:#d22
+}
+
+.inner {
+    background:#ddd
+}
+
+

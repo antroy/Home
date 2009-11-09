@@ -1,0 +1,226 @@
+/* * Quick mash-up of CSS for the TG quick start page. */ html, body {
+    margin: 0;
+    padding: 0;
+}
+
+#body {
+    margin:20px;
+    width:950px;
+    padding: 10px 0px;
+}
+
+#body .heading1 {
+    padding: 5px;
+    margin: 0px;
+    height: 3ex;
+    clear:both 
+}
+
+#minimal {
+    clear:both;
+    width:900px;
+}
+
+#header {
+    width:900px;
+    margin: 0px 20px;
+    padding-left: 10px;
+    clear:both;
+}
+
+#body .heading1 .left {
+    width: 65%;
+}
+
+.left {
+    float:left;
+    width: 300px;
+}
+
+#personal {
+    clear:both;
+}
+
+.notes_text_area {
+    width: 630px;
+    height: 100px;
+    margin: 0px 10px;
+}
+
+#body .heading1 .right {
+    text-align:right;
+    width: 30%;
+}
+
+.right {
+    float:right;
+}
+
+#header .right {
+    text-align:right;
+    width: 300px;
+}
+
+#left_pane {
+    padding: 10px;
+    text-align: justify;
+}
+
+#right_pane {
+    margin-right: 0px;
+    padding: 20px 
+}
+
+#left_pane, .left {
+    width: 675px;
+    float:left;
+}
+
+#left_pane .action_link {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.edit_dialog {
+    width: 400px;
+    height: 350px;
+    position: fixed;
+    top: 100px;
+    left: 100px;
+    text-align: center;
+}
+
+.edit_dialog select {
+    width: 125px;
+}
+
+.edit_dialog textarea {
+    width: 350px;
+    height: 200px;
+}
+
+.note_control {
+    margin: 10px;
+    padding: 0px 5px;
+}
+
+.note_control select {
+    width: 200px;
+}
+
+#left_pane .note, #left_pane .note_header {
+    margin: 10px;
+    padding: 0px 5px;
+}
+
+#left_pane .note_header {
+}
+
+#left_pane .note_header a {
+    width: 150px;
+    text-align: right;
+}
+
+#notes {
+    display:none;
+}
+
+.tab {
+    padding:2px;
+}
+
+.tab_body {
+    padding: 5px;
+    margin-top: 1px;
+}
+
+#right_pane, .right {
+    margin-right:0px;
+    width: 210px;
+    float:right;
+}
+
+#contents {
+    width: 600px;
+    padding: 15px 15px;
+}
+
+.form_field {
+    width: 400px;
+}
+
+.form_area {
+    width: 655px;
+    height: 370px;
+}
+
+#header table {
+    width: 100%;
+}
+
+#header table td .left_cell {
+    width:80%;
+}
+
+#header table td .right_cell {
+    text-align:right;
+}
+
+#main_content {
+    width: 757px;
+    margin: 0 auto 0 auto;
+    padding: 10px;
+}
+
+#sidebar {
+    margin: 0.5em;
+    padding: 1em;
+    float: right;
+    width: 200px;
+}
+
+#sidebar h2 {
+    margin-top: 0;
+}
+
+#sidebar ul {
+    margin-left: 1.5em;
+    padding-left: 0;
+}
+
+#footer {
+    padding: 10px;
+    text-align: center;
+    width: 757px;
+    margin: 0 auto 1em auto;
+}
+
+#status_block {
+    margin: 0 auto 0.5em auto;
+    padding: 15px 10px 15px 55px;
+    width: 450px;
+}
+
+.notice {
+    margin: 0.5em auto 0.5em auto;
+    padding: 15px 10px 15px 55px;
+    width: 450px;
+}
+
+#image_popup {
+    display:none;
+    /** position:fixed;
+    z-index:10;
+    top:5px;
+    left:5px;
+    **/ 
+}
+
+#dropdown {
+    display: block;
+    visibility:hidden;
+    position:absolute;
+    left:10px;
+    top:10px;
+}

@@ -1,0 +1,2 @@
+db_module=addressbook.model
+history_dir=$base/addressbook/sqlobject-history

@@ -1,0 +1,1 @@
+C:\Python24\python.exe "C:\Documents and Settings\aroy\My Documents\svn\ant-trunk\Python\sandbox\filesystem_monitor\monitor.py"

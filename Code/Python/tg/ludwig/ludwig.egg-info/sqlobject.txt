@@ -1,0 +1,2 @@
+db_module=ludwig.model
+history_dir=$base/ludwig/sqlobject-history

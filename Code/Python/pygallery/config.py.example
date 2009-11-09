@@ -1,0 +1,9 @@
+import logging
+
+log_file = r"/var/log/srv/gallery2.log"
+log_level = logging.DEBUG
+ftp_server=""
+ftp_user=""
+ftp_passwd=""
+
+static_image_root="http://www.antroy.co.uk/photos/"

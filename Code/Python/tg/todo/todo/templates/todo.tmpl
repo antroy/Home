@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<script src=".${tg.tg_js}/MochiKit.js"></script>
+<title>Ant's Things To Do</title>
+
+<style>
+    h2 {
+        color:darkred;
+        width: 70%;
+        text-align:center
+    }
+
+    .trimmed {
+        border: none
+    }
+
+    #todo {
+        width:70%
+    }
+
+    #todo div {
+        padding-left:5px;
+    }
+
+    span.checkbox, span.title, span.date {
+        text-align:left;
+        padding-left:5px
+    }
+
+    span.note {    
+        margin-left: 30px
+    }
+
+    span.checkbox {
+        width: 10px
+    }
+
+    span.title {
+    }
+
+    span.date {
+        width: 6em;
+        font-style: italic
+    }
+    
+    .headings {
+        font-weight:bold;
+
+    }
+
+    .headings span.date {
+        font-style: normal
+    }
+
+    .hide {
+        display: none
+    }
+
+    .show {
+        display: block
+    }
+
+    .done {
+        text-decoration: line-through
+    }
+
+    .notdone {
+        text-decoration: none
+    }
+
+    .odd {
+        background: gray
+    }
+
+    .even {
+        background: white
+    }
+
+</style>
+
+<script>
+
+visible_dict = {};
+
+function div_up(note){
+    return DIV({"class": "note"}, note);
+};
+
+function fetch_note(id, todo_id, url){
+
+    note_div = getElement(id);
+
+    if (id in visible_dict && visible_dict[id]){
+        hideElement(note_div);
+        visible_dict[id] = false;
+
+        return;
+    }
+    
+    visible_dict[id] = true;
+
+    new_div = DIV({"id": id}, "Waiting for data...");
+    swapDOM(note_div, new_div);
+    showElement(new_div);
+    
+    log("URL" + url);
+    d = loadJSONDoc(url); 
+
+    callback = function(data){
+        log("JSON: " + data);
+
+        notes = data["notes"];
+
+        log("NOTES: " + notes);
+    
+        new_note = DIV({'class': 'add_note'},
+                     FORM({'id': 'add_note_' + todo_id,
+                           'action': 'javascript:add_note("' + id + '",' + todo_id + ',"add_note_' + todo_id + '")', 
+                           'method':'post'},
+                           INPUT({'type':'hidden', 'name': 'id', 'value': todo_id}),
+                           INPUT({'type': 'text', 'name': 'note', 'value': "Add new note..."})));
+
+        new_div2 = DIV({"id": id, "class": "show"}, map(div_up, notes), new_note);
+        swapDOM(new_div, new_div2);
+        showElement(new_div2);
+    }
+    
+    d.addCallback(callback);
+}
+
+function add_note(id, todo_id, form_id){
+    form = getElement(form_id);
+    contents = formContents(form);
+
+    log("Form: " + repr(contents));
+    log("ID: " + id + "; TODO_ID: " + todo_id + "; FORM_ID: " + form_id);
+
+    url = "/add_note_for_id?" + queryString(contents[0], contents[1]);
+
+    log("Try to fetch url: " + url);
+    visible_dict[id] = false;
+    fetch_note(id, todo_id, url);
+}
+
+function show_note(id, todo_id){
+    url = "/notes_for_id?id=" + todo_id;
+    fetch_note(id, todo_id, url);
+}
+
+function update_done(id, cb_id, todo_id){
+    checkbox = getElement(cb_id);
+    div = getElement(id)
+    
+    checked = checkbox.checked
+
+    if (checked && ! hasElementClass(id, "done")) {
+       swapElementClass(div, "notdone", "done")
+    }
+    else if (!checked && ! hasElementClass(id, "notdone")){
+       swapElementClass(div, "done", "notdone")
+    }
+
+    url = "/done_for_id?id=" + todo_id + "&done=" + checked;
+    d = loadJSONDoc(url); 
+    d.addCallback(function(){})
+}
+
+</script>
+
+</head>
+<body>
+    <h2>The List of Things To Do</h2>
+
+        <div id="todo">
+            <div class="headings">
+            <span class="checkbox"></span>
+            <span class="date">Deadline</span>
+            <span class="title">Job</span>
+        </div>
+        </div>
+    #for $i, $todo in enumerate($todoitems)
+            <div id="item${todo.id}" 
+                class="${['even','odd'][i % 2]} ${['notdone', 'done'][todo.done]}"
+                <span class="checkbox">   
+                    <input id="cb_${todo.id}" name="done" type="checkbox" ${['', 'checked'][todo.done]} onclick="javascript:update_done('item${todo.id}', 'cb_${todo.id}', '${todo.id}')"/>
+                </span>
+                <span class="date">$todo.deadline</span>
+                <span class="title">$todo.title</span>
+                <a href="#" onclick="javascript:show_note('note${todo.id}', ${todo.id})"><img class="trimmed" src="static/images/note.png" alt="notes" title="notes" /></a>
+                <div id="note${todo.id}" class="hide"></div>
+            </div>
+            </div>
+    #end for
+
+    
+    <h4>Add New Job</h4>
+
+    <form name="add_item" action="add" method="post">
+    <div id="add_item">
+        <div>
+            <span>Deadline: <input name="deadline" type="text"/></span>
+            <span>Job: <input name="title" type="text"/></span>
+            <span><input type="submit" value="Add"/></span>
+        </div>
+    </div>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>The Ludwig Brainstormer - New Idea</title>
+<link rel="stylesheet" href="./static/css/style.css"/>
+<script type="text/javascript" src=".${tg.tg_js}/MochiKit.js"></script>
+
+<script type="text/javascript">
+   focusOnLoad("title"); 
+
+function validate_and_submit(){
+    /*title = getElement("title");
+    category = getElement("categories");
+    status = getElement("status");
+    //text = getElement("textarea");
+
+    empty = function(elm){
+        val = elm.value;
+        return val.length == 0;
+    }
+
+    emptiness = map(empty, [title, category, status]);//, text]);
+
+    some_empty = reduce( function(x,y){return x || y}, emptiness );
+
+    if (some_empty)
+    {
+        alert("Please fill in all fields!");
+    }
+    else
+    {*/
+        form = getElement("new_idea");
+        form.submit();
+    //}
+}
+
+   function search_or_edit_cat(cat){
+       if ( getElement( "search_control" ).checked)
+       {
+           window.location = "category_search?category=" + cat;
+       }
+       else
+       {
+           e = getElement("categories");
+           val = e.value;
+           
+           e.value = val + ( val.length == 0 ? "" : " ") + cat;
+       }
+   }
+   
+   function search_or_edit_status(status){
+       if ( getElement( "search_control" ).checked)
+       {
+           window.location = "status_search?status=" + status;
+       }
+       else
+       {
+           e = getElement("status");
+           e.value = status;
+       }
+   }
+
+</script>
+</head>
+<body>
+
+    $header
+
+<div id="body">
+    <div class="heading1">
+        <div class="left">Add New Idea</div>
+    </div>
+
+    <div id="left_pane">
+        <form name="new_idea" id="new_idea" action="add" method="post">
+            <input type="hidden" name="id" value="$idea.id" />
+            <table class="form_table">
+            <tr>
+                <td>Title:</td>
+                <td><input name="title" id="title" type="text" class="form_field" value="${idea.title}" /></td>
+            </tr>
+
+            <tr>
+                <td>Category:</td>
+                <td><input name="categories" id="categories" class="form_field" type="text" value="#echo ' '.join([cat.name for cat in $idea.categories]) #" /></td>
+            </tr>
+            <tr>
+                <td>Status:</td>
+                <td>
+                <input name="status" id="status" type="text" class="form_field" 
+                       value="#if $idea.status then $idea.status.name else ''#" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div id="text">
+                        <textarea name="text" class="form_area" id="textarea">${idea.text}</textarea>
+                    </div>
+                </td>
+            </tr>
+            </table>
+
+            <input type="button" onclick="javascript:validate_and_submit();" value=" #if hasattr($idea, "dummy") then "Add" else "Update" # Idea"/>
+        </form>
+    </div>
+
+    <div id="right_pane">
+            <div class=status_line">
+                Choose: <input type="radio" name="action_type" id="choose_control" checked="true" />
+                Search: <input type="radio" name="action_type" id="search_control"/>
+            </div>
+            <div id="status">
+                <h3>Statuses</h3>
+                <div class="status_line">
+                    #for $stat in $statuses
+                    <div class="category">
+                        <a href="javascript:search_or_edit_status('$stat');" alt="Get $stat ideas">$stat</a>
+                    </div>
+                    #end for
+                </div>
+            </div>
+
+            <div id="categories">
+                <h3>Categories:</h3> 
+                #for $cat in $categories
+                    <div class="category">
+                        <a href="javascript:search_or_edit_cat('$cat');" alt="Get $cat ideas">$cat</a>
+                    </div>
+                #end for
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

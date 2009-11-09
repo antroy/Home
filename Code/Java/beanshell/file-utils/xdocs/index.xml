@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <author email="anthony.roy@bl.uk">Anthony Roy</author>
+        <title>Tools: Beanshell File Utilities</title>
+    </properties>
+
+    <meta name="keyword" content="wispr, build" />
+
+    <body>
+        <section name="Introduction">
+            <div style="margin-left:4px;padding-left:4px;border:1px #900 solid;float:right;width:50%;font-size: smaller; color: rgb(153, 0, 0);">
+                <b>SVN:</b>
+                <br/>
+                <a href="http://w2k-rsdev1:1234/svn/bl-tools/trunk/bsh/file-utils/" title="Subversion Repository">
+                            http://w2k-rsdev1:1234/svn/bl-tools/trunk/bsh/file-utils/</a>
+                <br/>
+                <b>TRAC:</b>
+                <br/>
+                <a href="http://w2k-rsdev1:1234/projects/bl-tools">
+    http://w2k-rsdev1:1234/projects/bl-tools/</a>
+            </div>
+            <p>
+            A library of beanshell commands providing easy and intuitive (ant-like)
+            commands for manipulating files. This includes commands for zipping and unzipping 
+            files and folders, copying files, performing string replacement in text
+            files etc.</p>
+            
+            <p>
+            To use the library in your scripts, it must be added to the classpath along with the 
+            Jakarta Commons IO library (which will be present in the zip distribution of this 
+            library). This can be done dynamically within your script with the following code
+            (which assumes that the jar files for each library are in a lib subfolder of the 
+            scripts directory):
+            </p>
+            <pre>
+    File lib = new File(curdir, "lib");        
+    File[] jars = lib.listFiles();
+    
+    for (jar : jars){
+        addClassPath(jar.getAbsolutePath());
+    }
+       </pre>
+            <p>To add the library as a set of beanshell commands, add the following 
+            code (after the classpath has been set):</p>
+            <pre>
+    importCommands("uk.bl.bspa.bsh.file");
+            </pre>
+            
+            <p>
+            The JavaDocs provide information on the available commands:
+            </p>
+            <ul>
+            <li><a href="http://w2k-rsdev1:9080/maven/tools/bsh/file-utils/apidocs/uk/bl/bspa/bsh/file/copyFile.html" alt="copyFile">copyFile</a></li>
+            <li><a href="http://w2k-rsdev1:9080/maven/tools/bsh/file-utils/apidocs/uk/bl/bspa/bsh/file/copy.html" alt="copy">copy</a></li>
+            <li><a href="http://w2k-rsdev1:9080/maven/tools/bsh/file-utils/apidocs/uk/bl/bspa/bsh/file/zip.html" alt="zip">zip</a></li>
+            <li><a href="http://w2k-rsdev1:9080/maven/tools/bsh/file-utils/apidocs/uk/bl/bspa/bsh/file/unzip.html" alt="unzip">unzip</a></li>
+            <li><a href="http://w2k-rsdev1:9080/maven/tools/bsh/file-utils/apidocs/uk/bl/bspa/bsh/file/replace.html" alt="replace">replace</a></li>
+            </ul>
+            <p>
+            It's worth checking out the javadocs for the Commons IO as well, since you'll have it 
+            on the classpath anyway. It has some pretty useful classes to do IO type things - 
+            a set of predefined FileFilters for example: <a href="http://jakarta.apache.org/commons/io/apidocs/index.html">
+            Commons IO</a>
+            </p>
+        </section>
+    </body>
+</document>

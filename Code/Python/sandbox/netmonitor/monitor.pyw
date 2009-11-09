@@ -1,0 +1,3 @@
+import netmonitor
+
+netmonitor.main()

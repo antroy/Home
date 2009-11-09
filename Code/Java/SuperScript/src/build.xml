@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+
+<project name="SuperScript" default="compile" basedir=".">
+	<property file="build.properties"></property>
+    <property name="plugin.build" value="../build" />
+    <property name="version" value="0.4" />
+    <property name="plugin.src" value="." />
+    <property name="plugin.lib" value="../lib" />
+	<property name="jedit.install.dir" value="../.." />
+	<property name="install.dir" value="../.." />
+    <property name="jedit.jars" value="../lib" />
+
+
+	<target name="init">
+		<mkdir dir="${plugin.build}"/>
+	</target>
+
+    <path id="build.classpath">
+        <!-- Other plugin dependencies -->
+        <pathelement path="${jedit.install.dir}/jedit.jar" />
+		<pathelement path="${install.dir}/bsf.jar" />
+		<pathelement path="${install.dir}/jython.jar" />
+		<pathelement path="${jedit.jars}/bsf.jar" />
+		<pathelement path="${jedit.jars}/jython.jar" />
+		<pathelement path="${install.dir}/Console.jar" />
+    </path>
+
+    <target name="compile" description="Compiles all java files for the plugin" depends="init">
+        <javac
+                srcdir="${plugin.src}"
+                destdir="${plugin.build}"
+                deprecation="on"
+                debug="on"
+		optimize="on"
+        >
+            <classpath>
+                <path refid="build.classpath"/>
+            </classpath>
+        </javac>
+
+        <!-- <antcall description="Generates updated tag files" target="tags" /> -->
+    </target>
+
+
+    <target name="clean" description="Removes all generated files" depends="init">
+        <delete>
+            <fileset dir="${plugin.build}" includes="**/*.class,**/*.props"/>
+        </delete>
+    </target>
+
+
+    <target name="dist" depends="compile" description="Packages the plugin in the jars directory">
+		<copy todir="${plugin.build}">
+			<fileset dir="${plugin.src}" includes="*.xml,*.props,**/*.txt,**/*.log" excludes="build.xml"></fileset>
+            <fileset dir="${basedir}/.." includes="docs/*.html,docs/bsf-license.txt" excludes="build.xml"></fileset>
+		</copy>
+        <jar
+            jarfile="${install.dir}/${ant.project.name}.jar"
+            basedir="${plugin.build}"
+            includes="**/*.class,**/*.xml,**/*.html,**/*.props,**/*.gif,**/*.txt,**/*.log"
+            excludes="build.xml"
+        />
+    </target>
+
+
+    <target name="srcdist" description="Packages sources for distribution">
+        <zip zipfile="${plugin.src}/${ant.project.name}${version}_src.zip"
+            basedir="${plugin.src}/.."
+            excludes="build/**,tags/**,**/*.bak,**/Fas*.jar,**/*.class,**/${ant.project.name}${version}_src.zip,**/*.*~"
+        />
+    </target>
+
+    <target name="release" description="Packages for Plugin Central distribution" depends="init,dist">
+        <zip zipfile="../${ant.project.name}${version}_bin.zip">
+			<fileset dir="${jedit.jars}" includes="bsf.jar,${ant.project.name}.jar"></fileset>
+		</zip>
+		<zip zipfile="../${ant.project.name}${version}_src.zip">
+			<fileset dir=".." excludes="**/${ant.project.name}.jar,**/*.zip, build/**, .*, **/build.properties"></fileset>
+		</zip>
+    </target>
+
+    <target name="tags">
+         <exec executable="ctags">
+               <arg value="-R" />
+               <arg value="-B" />
+               <arg value="-F" />
+               <arg value="-h .java" />
+               <arg value="-f ../tags/${ant.project.name}.tags" />
+               <arg path="${plugin.src}" />
+        </exec>
+    </target>
+
+</project>
+
+

@@ -1,0 +1,2 @@
+db_module=todo.model
+history_dir=$base/todo/sqlobject-history

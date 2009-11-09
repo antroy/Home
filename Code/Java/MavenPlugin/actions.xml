@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE ACTIONS SYSTEM "actions.dtd">
+
+<ACTIONS>
+<ACTION NAME="show-maven-dockable">
+        <CODE>
+            manager = view.getDockableWindowManager();
+            manager.showDockableWindow("maven-dock");
+        </CODE>
+  </ACTION>
+</ACTIONS>
+

@@ -1,0 +1,291 @@
+#encoding UTF-8
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>${idea.title}</title>
+
+<script type="text/javascript" src=".${tg.tg_js}/MochiKit.js"></script>
+<script type="text/javascript">
+
+function preview_attachment(url)
+{
+   var img = getElement("popup_image");
+   img.src = url;
+   showElement("image_popup");
+
+}
+
+function hide_preview()
+{
+   hideElement("image_popup");
+}
+
+function show_edit_action(action_id){
+    var edit = (action_id != null);
+
+    if (edit)
+    {
+        var url = "./get_action_data?id=" + action_id;
+        var d = loadJSONDoc( url );
+        
+        var callback = function (result) {
+             text = result['text'];
+             assigned_to = result['assigned_to'];
+             display_dialog("edit_action", "action", action_id, text, assigned_to.id);
+        }
+
+        d.addCallback(callback);
+    }
+    else
+    {
+        display_dialog("add_action", "action", null, "", null);
+    }
+}
+
+function get_options(assigned_to){
+  var out = []
+  #for $i, $user in enumerate($all_users)
+     var d = {'value':'$user.id'};
+
+     if ($user.id == assigned_to){
+        d['selected'] = 'selected';
+     }
+     
+     var opt = OPTION(d, '$user.display_name')
+     
+     out.push(opt);
+  #end for
+
+  return out;
+}
+
+function display_dialog(action, type, id, text, assigned_to){
+    var type = type.toLowerCase();
+    var edit_action = type == "action";
+    var capit = type.substring(0,1).toUpperCase() + type.substring(1);
+    var select = edit_action ? SELECT({'name': 'assign_to'}, get_options(assigned_to)) : null;
+            
+    var edit_box = DIV({'id': 'edit_box', 'class': "edit_dialog"},
+                 FORM({'name': type + '_edit_form', 'action': action, 'method': 'POST'},
+                   H2(null, "Edit " + capit),
+                   INPUT({'type':'hidden', 'name': 'id', 'value': id}),
+                   INPUT({'type':'hidden', 'name': 'item_id', 'value': $idea.id}),
+                        select, 
+                        TEXTAREA({'class':'small_edit_box', 'name': 'text'}, text),
+                        INPUT({'type':'submit','value':'Update'}),  
+                        INPUT({'type':'button','value':'Cancel', 
+                                'onclick': 'javascript:removeElement("edit_box");'})   
+                 )
+               );
+     
+     appendChildNodes(currentDocument().body, edit_box);
+}
+
+function show_edit_note(id)
+{
+    var edit = (id != null);
+
+    if (edit)
+    {
+        var url = "./get_note_data?id=" + id;
+        var d = loadJSONDoc( url );
+        
+        var callback = function (result) {
+             var text = result['text'];
+             display_dialog("edit_note", "note", id, text, null);
+        }
+
+        d.addCallback(callback);
+    }
+    else
+    {
+        display_dialog("add_note", "note", null, "", null);
+    }
+}
+
+function tab(hide_tab, show_tab, hide_id, show_id)
+{
+    swapElementClass(hide_tab, "tab_front", "tab_rear"); 
+    swapElementClass(show_tab, "tab_rear", "tab_front"); 
+    hideElement(hide_id);
+    showElement(show_id);
+    
+}
+
+function add_edit_update(action_id, update_id)
+{
+    var edit = (update_id != null); 
+    var type = edit ? "Edit" : "Add";
+    var button_text = edit ? "Update" : "Add New Update";
+    var text = "";
+    
+    var display = function()
+    {
+        var edit_box = DIV({'id': 'add_edit_box', 'class': "edit_dialog"},
+                     FORM({'name': 'add_edit_update_form', 'action': 'add_edit_update', 'method': 'POST'},
+                       H2(null, type + " Action Update"),
+                       INPUT({'type':'hidden', 'name': 'idea_id', 'value': $idea.id}),
+                       INPUT({'type':'hidden', 'name': 'action_id', 'value': action_id}),
+                       INPUT({'type':'hidden', 'name': 'update_id', 'value': update_id}),
+                            TEXTAREA({'class':'small_edit_box', 'name': 'text'}, text),
+                            INPUT({'type':'submit','value': button_text}),  
+                            INPUT({'type':'button','value':'Cancel', 
+                                    'onclick': 'javascript:removeElement("add_edit_box");'})   
+                     )
+                   );
+
+         appendChildNodes(currentDocument().body, edit_box);
+     }
+
+    if (edit)
+    {
+        var url = "./get_action_update_data?id=" + update_id;
+        var d = loadJSONDoc( url );
+        
+        var callback = function (result) {
+             var text = result['text'];
+             var assigned_to = result['assigned_to'];
+             display();
+        }
+
+        d.addCallback(callback);
+    }
+    else
+    {
+        display();
+    }
+    
+}
+
+</script>
+
+<link rel="stylesheet" href="./static/css/style.css"/>
+</head>
+<body>
+    $header
+
+    <div id="body">
+
+    <div class="heading1">
+        <div class="left">${idea.title}</div> 
+        <div class="right">Date: $idea.date / Entered by: $idea.user.display_name</div>
+    </div>
+
+    <div id="left_pane">
+        <div id="text_pane">
+            <div class="text">
+                #echo $reSt($idea.text) 
+            </div>
+            <div class="action_link">
+                <form name="edit" action="edit" method="post">
+                    <input type="hidden" name="id" value="${idea.id}"/>
+                    <input type="submit" value="Edit Idea" />
+                </form>
+            </div>
+        </div>
+
+        <div id="tab_bar">
+            <span id="actions_tab" class="tab tab_front">
+                <a href="javascript:tab('notes_tab', 'actions_tab', 'notes', 'actions')">Actions</a>
+                #if $idea.actions
+                <img src="./static/images/green_check.gif" alt="Notes present"/>
+                #end if
+            </span>
+            <span id="notes_tab" class="tab tab_rear">
+                <a href="javascript:tab('actions_tab', 'notes_tab', 'actions', 'notes')">Notes</a>
+                #if $idea.notes
+                <img src="./static/images/green_check.gif" alt="Actions present"/>
+                #end if
+            </span>
+        </div>
+
+        <div id="notes" class="tab_body">
+            <h3>Notes
+              <a href="javascript:show_edit_note(null)" alt="Add Note">
+                <img src="./static/images/add.png" alt="Add Note" title="Add Note"/>
+              </a>
+            </h3>
+                #for $note in $idea.notes:
+                    <div class="note_header">
+                        Date: $note.date / Entered by: $note.user.display_name
+                        <a href="javascript:show_edit_note('$note.id')" alt="Edit Note">
+                            <img src="./static/images/edit.png" alt="Edit Note" title="Edit Note"/>
+                        </a>
+                    </div>
+                    <div class="note">
+                        #echo $reSt($note.text) 
+                    </div>
+                #end for
+        </div>
+
+        <div id="actions" class="tab_body">
+            <h3>Actions
+              <a href="javascript:show_edit_action(null)" alt="Add Action">
+                <img src="./static/images/add.png" alt="Add Action" title="Add Action"/>
+              </a>
+            </h3>
+                #for $action in $idea.actions:
+                    <div class="note_header">
+                        <span class="owner">Owner: $action.assigned_to.display_name</span> -
+                        Date: $action.date / Entered by: $action.assigned_by.display_name
+                        <a href="javascript:show_edit_action('$action.id')" alt="Edit Action"><img src="./static/images/edit.png" alt="Edit Action" title="Edit Action"/></a>
+                        <a href="javascript:add_edit_update('$action.id', null)" alt="Add Action Update"><img src="./static/images/add.png" alt="Add Update" title="Add Update"/></a>
+                    </div>
+                    <div class="note" id="action_$action.id">
+                        #echo $reSt($action.text)
+                    </div>
+                    #for $update in $action.notes:
+                    <div class="note">
+                        <a href="javascript:add_edit_update('$action.id', $update.id)" alt="Edit Action Update"><img src="./static/images/edit.png" alt="Edit Update" title="Edit Update"/></a>
+                        #echo $update.text
+                    </div>
+                    #end for
+                #end for
+            </div>
+        </div>
+
+    <div id="right_pane">
+    <div id="status">
+        <h3>Status</h3>
+        <div class="status_line">
+            <div class="category">
+                <a href="status_search?status=$idea.status.name" alt="Get $idea.status.name ideas">$idea.status.name</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="categories">
+        <h3>Categories:</h3> 
+        #for $cat in $idea.categories
+            <div class="category">
+                <a href="category_search?category=$cat.name" alt="Get $cat.name ideas">$cat.name</a>
+            </div>
+        #end for
+    </div>
+
+    <div id="attachments">
+    <h3>Attachments</h3>
+        #for $att in $idea.attachments:
+            <div class="attachment">
+                <a href="$att.url" onmouseover="javascript:preview_attachment('$att.thumb_url()'); " onmouseout="hide_preview();">$att.filename</a>
+            </div>
+        #end for
+        <form name="attach_file" action="attach" enctype="multipart/form-data" method="post">
+            <input type="file" id="upload_file" name="upload_file"/>
+            <input type="hidden" id="item_id" name="item_id" value="${idea.id}"/>
+
+            <input type="submit" value="Attach" />
+        </form>
+    </div>
+    <div id="image_popup">
+        <img id="popup_image" alt="No preview available." src=""/>
+    </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>
+

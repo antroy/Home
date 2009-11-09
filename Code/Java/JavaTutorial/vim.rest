@@ -1,0 +1,137 @@
+==============
+Vim Cheatsheet
+==============
+
+This cheatsheet focuses on the sort of thing you may expect to be able to do in a simple text editor.
+
+The Basics
+==========
+
+Moving around
+-------------
+
+- Forward one character: **l or Right Arrow**
+
+- Back one character: **h or Left Arrow**
+
+- Up a line: **k or Up Arrow**
+
+- Down a line: **j or DownArrow**
+
+Note: the arrow keys also work in insert mode.
+
+- Move forward to the start of the next word: **w**
+
+- Move to the end of the end of the word: **e**
+
+- Move back to the previous word: **b**
+
+All of these commands can be prefixed by a number, so that *4w* means move forward 4 words, and 7j means go down 7 lines.
+
+- End of the line: **$**
+
+- Start of line: **^**
+
+- End of document: **G**
+
+- Start of document: **gg**
+
+Inserting Text
+--------------
+
+The following commands enter INSERT mode with a few minor differences:
+
+- **i**: Enter INSERT mode, and start entering text before the cursor.
+
+- **a**: Enter INSERT mode, and start entering text after the cursor.
+
+- **R**: Enter INSERT mode, and start entering text at the cursor, in "overwrite" mode.
+
+Undo and Redo
+-------------
+
+- Undo: **u**
+
+- Redo: **CTRL-r** - (this means hold the control key and press 'r')
+
+Copy and Paste
+--------------
+
+Copying text is called yanking in Vim, and consists of the letter 'y' followed by a motion command.
+
+- Yank a word: **yw**
+
+- Yank a line: **yy**
+
+- Yank 5 lines: **5yy**
+
+- Paste contents of register (where things are yanked): **p**
+
+- Yank word to register "a": **"ayw**
+
+- Paste from register "a": **"ap**
+
+- Append word to register "a": **"Ayw**
+
+- List contents of registers: **:reg**
+
+Delete and Change
+-----------------
+
+All of the following use d and D to delete things. You can use c and C instead, which deletes and enters INSERT mode.
+
+- Delete a word: **dw**
+
+- Delete a line: **dd**
+
+- Delete 5 lines: **5dd**
+
+- Delete until end of line: **d$** or **D**
+
+Search and Replace
+------------------
+
+- Finding a string is a simple matter:
+
+- Search forwards from cursor: **/my string**
+
+- Search backwards from cursor: **?my string**
+
+- Next match in the direction of search: **n**
+
+- Next match in the opposite direction: **N**
+
+- Replacing text looks a bit wierder:
+
+Search for first instance of his in the current line and replace with hers: **:s/his/hers**
+
+- Search file for first instance of his and replace with hers: **:%s/his/hers**
+
+- Search file for all instances of his and replace with hers: **:%s/his/hers/g**
+
+- Search file for all instances of his and replace with hers, confirming each replacement: **:%s/his/hers/gc**
+
+Saving Your Work
+----------------
+
+You'll want to save what you are doing once in a while:
+
+- Write the file: **:w**
+
+- Write to a different file: **:w c:/myfolder/myfile.txt**
+
+- Write to a different file that already exists: **:w! c:/myfolder/myfile.txt**
+
+Getting back out of Vim
+-----------------------
+
+What? You want to get out? Are you crazy? Oh, OK then...
+
+- Quit: **:q**
+
+- Quit and save: **:x**
+
+- Quit and discard changes: **:q!**
+
+
+

@@ -1,0 +1,25 @@
+<table>
+    <tr>
+        <td>Name:</td>
+        <td>{{ contact.first_name }} {{ contact.last_name }}</td>
+    </tr>
+    <tr>
+        <td>Address:</td>
+        <td>
+            {{ contact.address.line1  }} <br />
+            {{ contact.address.line2  }} <br />
+            {{ contact.address.town  }} <br />
+            {{ contact.address.county }} <br />
+            {{ contact.address.country }} <br />
+            {{ contact.address.postcode }} <br />
+        </td>
+
+        <tr><td>Telephone:</td><td>{{ contact.phone_home }}</td></tr>
+        <tr><td>Work</td><td>{{ contact.phone_work }}</td></tr>
+        <tr><td>Mobile</td><td>{{ contact.phone_mobile }}</td></tr>
+        <tr><td>Other</td><td>{{ contact.phone_other }}</td></tr>
+        <tr><td>Main Email</td><td>{{ contact.email_one }}</td></tr>
+        <tr><td>Second Email</td><td>{{ contact.email_two }}</td></tr>
+        <tr><td>Birthday</td><td>{{ contact.birthday }}</td></tr>
+        <tr><td>Notes</td><td>{{ contact.notes }}</td></tr>
+</table>

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<title>$title</title>
+<link rel="stylesheet" href="./static/css/style.css"/>
+<link rel="stylesheet" href="./static/css/structure.css"/>
+
+<script type="text/javascript" src=".${tg.tg_js}/MochiKit.js"></script>
+<script type="text/javascript" src="./static/javascript/ab.js"></script>
+
+</head>
+<body onload="reset();">
+    
+    $header
+
+    <div id="body">
+
+    <form>
+        <div id="minimal">
+            <table width="900px">
+                <tr><td valign="top">
+                <h2>Personal Details</h2>
+                <table>
+                    <tr>
+                        <td>First Name: </td>
+                        <td><input type="text" name="first_name" id="first_name" value="" /></td>
+                    </tr>
+                    <tr><td>Last Name: </td><td><input type="text" name="last_name" value="" /></td></tr>
+                    <tr><td>Birthday: </td><td><input type="text" name="birthday" value="" /></td></tr>
+                    <tr><td>Tags: </td><td><input type="text" name="tags" value="" /></td></tr>
+                </table>
+                </td>
+                <td valign="bottom">
+                    Notes: <br/>
+                    <textarea name="notes" rows="8" cols="50"></textarea>
+                </td></tr>
+            </table>
+
+            <div id="personal">
+                <h3>Phone - Email - Web</h3>
+                <div id="personal_list"></div>
+               <a href="javascript:add_personal();">Add phone/email/other</a> 
+            </div>
+        </div>
+
+        <div id="addressgroups">
+            <h3>Address Groups</h3>
+
+            <div id="group_list"></div>
+
+            <a href="javascript:add_group();">Add Address Group</a> 
+        </div>
+
+    </form>
+
+    </div>
+
+    <div id="dropdown">
+        Nothing here yet!
+    </div>
+
+</body>
+</html>
+

@@ -1,0 +1,38 @@
+#some props here
+
+#name=value
+plugin.com.patelsoft.superscript.SuperScriptPlugin.name=SuperScript
+plugin.com.patelsoft.superscript.SuperScriptPlugin.author=Jiger Patel
+plugin.com.patelsoft.superscript.SuperScriptPlugin.version=0.4
+plugin.com.patelsoft.superscript.SuperScriptPlugin.depend.0=jdk 1.3
+plugin.com.patelsoft.superscript.SuperScriptPlugin.depend.1=jedit 04.02.01.00
+plugin.com.patelsoft.superscript.SuperScriptPlugin.docs=docs/index.html
+
+#external dependencies
+plugin.com.patelsoft.superscript.SuperScriptPlugin.jars=bsf.jar
+
+#jEdit 4.2 settings
+plugin.com.patelsoft.superscript.SuperScriptPlugin.activate=startup
+plugin.com.patelsoft.superscript.SuperScriptPlugin.menu-item=superscript.show
+
+# Label For MenuItem, Dockable Title etc
+superscript.label=SuperScript
+superscript.show.label=SuperScript
+superscript.title=SuperScript
+
+
+plugin.com.patelsoft.superscript.SuperScriptPlugin.option-pane=superscript
+options.superscript.label=SuperScript
+options.superscript.code=com.patelsoft.superscript.SuperScriptPlugin.getSuperScriptOptionPane();
+
+console.bsf.info=BSF Scripting Console.
+console.bsf.prompt=bsf
+
+# #other properties
+#
+# options.superscript.label=SuperScript
+# superscript.toggle.label=SuperScript
+
+#macro settings
+macro-handler.superscript.label=SuperScript
+
